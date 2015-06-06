@@ -13,7 +13,7 @@ import com.xinlan.rocketship.screen.GameScreen;
 public class Rocket extends BaseObject {
     private GameScreen context;
     private TextureRegion rocketTexture;
-    private float speed = 10;
+    private float speed = 4f;
 
     public Rocket(GameScreen screen) {
         this.context = screen;
@@ -21,7 +21,7 @@ public class Rocket extends BaseObject {
         Texture originTexture = new Texture(Gdx.files.internal("rocket.png"));
         rocketTexture = new TextureRegion(originTexture, 0, 0, 145, 256);
         this.position.set(GameScreen.WORLD_WIDTH / 2, GameScreen.WORLD_HEIGHT / 2);
-        this.bound.set(this.position.x, this.position.y, 60, 100);
+        this.bound.set(this.position.x, this.position.y, 30, 50);
     }
 
     public void update(float delta) {

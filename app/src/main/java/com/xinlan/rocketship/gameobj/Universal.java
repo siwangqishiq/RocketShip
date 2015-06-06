@@ -21,7 +21,7 @@ public class Universal {
     }
 
     public void initStars() {
-        final int step = 100;
+        final int step = 70;
         for (int i = 0; i < GameScreen.WORLD_HEIGHT; i += step) {
             for (int j = 0; j < GameScreen.WORLD_WIDTH; j += step) {
                 stars.add(new Star(MathUtils.random(j, j + step), MathUtils.random(i, i + step)));
@@ -40,7 +40,7 @@ public class Universal {
         for (Star star : stars) {
             batch.setColor(originColor.r, originColor.g, originColor.b, star.alpha);
             batch.draw(starTexture, star.position.x,
-                    star.position.y, Star.SIZE, Star.SIZE);
+                    star.position.y, Star.SIZE * star.scale, Star.SIZE *  star.scale);
         }//end for each
         batch.setColor(originColor);
     }
