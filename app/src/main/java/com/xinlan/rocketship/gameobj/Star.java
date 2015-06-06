@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
  * Created by Administrator on 2015/6/6.
  */
 public class Star {
-    public static final int SIZE=3;
+    public static final int SIZE=7;
     public Vector2 position = new Vector2(0, 0);
     public float scale = 1f;
     public float maxAlpha = 1f;
@@ -19,7 +19,7 @@ public class Star {
     public Star(float x, float y) {
         //System.out.println(x+"    "+y);
         position.set(x, y);
-        this.scale = MathUtils.random(0.1f, 1f);//Ëõ·Å±ÈÀý
+        this.scale = MathUtils.random(0.1f, 1f);
 
         while(Math.abs(maxAlpha-minAlpha)<0.2f){
             float num1 = MathUtils.random(0, 1);

@@ -4,14 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.xinlan.rocketship.RocketApp;
+import com.xinlan.rocketship.gameobj.Controller;
+import com.xinlan.rocketship.gameobj.Rocket;
 import com.xinlan.rocketship.gameobj.Universal;
 
 /**
  */
 public final class GameScreen extends DefautScreen {
-    public static final int WORLD_WIDTH = 2000;//ÊÀ½ç¿í
-    public static final int WORLD_HEIGHT = 2000;//ÊÀ½ç¸ß
+    public static final int WORLD_WIDTH = 3000;//ä¸–ç•Œå®½
+    public static final int WORLD_HEIGHT = 3000;//ä¸–ç•Œé«˜
 
     public static final int SCREEN_HEIGHT = 480;
     public static final int SCREEN_WIDTH = 800;
@@ -23,7 +26,9 @@ public final class GameScreen extends DefautScreen {
     public SpriteBatch backgroundBatch;
 
     //GameObject
+    public Controller mController;
     Universal mUniversal;
+    Rocket mRocket;
 
     public GameScreen(RocketApp game) {
         super(game);
@@ -35,36 +40,65 @@ public final class GameScreen extends DefautScreen {
         gameCamera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         batch = new SpriteBatch();
 
-
-
         gameInit();
     }
 
     private void gameInit() {
+        mController = new Controller(this);
+
         mUniversal = new Universal(this);
         mUniversal.initStars();
+
+        mRocket = new Rocket(this);
     }
 
     @Override
     public void render(float delta) {
         //TODO update
+        mController.update(delta);
         mUniversal.update(delta);
+        mRocket.update(delta);
 
         //TODO render
         delta = Math.min(0.06f, delta);
-        Gdx.gl.glClearColor(0, 0, 0, 1);//Ë¢ÐÂºÚÉ«±³¾°
+        Gdx.gl.glClearColor(0, 0, 0, 1);//åˆ·æ–°é»‘è‰²èƒŒæ™¯
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        updateGameCamera();//æ›´æ–°æ‘„åƒæœºä½ç½®
 
-        batch.setProjectionMatrix(gameCamera.combined);
-        gameCamera.update();
         batch.begin();
         mUniversal.render(batch);
+        mRocket.render(batch);
         batch.end();
+
+        mController.render(batch);
+    }
+
+    private void updateGameCamera() {
+        batch.setProjectionMatrix(gameCamera.combined);
+        //æ‘„åƒæœºè·Ÿéš
+        Vector3 cameraPos = gameCamera.position;
+        cameraPos.x = mRocket.position.x;
+
+        if (cameraPos.x + SCREEN_WIDTH / 2 > WORLD_WIDTH) {
+            cameraPos.x = WORLD_WIDTH - SCREEN_WIDTH / 2;
+        } else if (cameraPos.x < SCREEN_WIDTH / 2) {
+            cameraPos.x = SCREEN_WIDTH / 2;
+        }
+
+        cameraPos.y = mRocket.position.y;
+        if (gameCamera.position.y < SCREEN_HEIGHT / 2) {
+            cameraPos.y = SCREEN_HEIGHT / 2;
+        } else if (gameCamera.position.y > WORLD_HEIGHT - SCREEN_HEIGHT / 2) {
+            cameraPos.y = WORLD_HEIGHT - SCREEN_HEIGHT / 2;
+        }//end if
+
+        gameCamera.update();
     }
 
 
     @Override
     public void dispose() {
+        mController.dispose();
         mUniversal.dispose();
     }
 

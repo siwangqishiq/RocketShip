@@ -17,10 +17,10 @@ public abstract class GameObject {
     public Vector2 dimension;
     public Vector2 scale;
     public float rotation;
-    public Vector2 velocity = new Vector2();// 速度
-    public Vector2 maxVelocity = new Vector2();// 极限速度
-    public Vector2 friction = new Vector2();// 摩擦力
-    public Vector2 acceleration = new Vector2();// 加速度
+    public Vector2 velocity = new Vector2();
+    public Vector2 maxVelocity = new Vector2();
+    public Vector2 friction = new Vector2();
+    public Vector2 acceleration = new Vector2();
     public Rectangle bounds = new Rectangle();
 
     public GameObject() {
@@ -31,7 +31,7 @@ public abstract class GameObject {
         rotation = 0;
     }
 
-    public void update(float deltaTime) {// 数据更新'
+    public void update(float deltaTime) {//
         updateMotionX(deltaTime);
         updateMotionY(deltaTime);
         position.x += velocity.x * deltaTime;
@@ -64,5 +64,5 @@ public abstract class GameObject {
                 maxVelocity.y);
     }
 
-    public abstract void render(SpriteBatch batch);// 渲染到屏幕
+    public abstract void render(SpriteBatch batch);// 锟斤拷染锟斤拷锟斤拷幕
 }//end class

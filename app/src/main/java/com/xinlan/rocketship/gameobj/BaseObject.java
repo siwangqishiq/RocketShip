@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class BaseObject {
     public Vector2 position = new Vector2();
     public Vector2 maxVelocity = new Vector2();
-    public Vector2 heading = new Vector2();// 朝向向量
-    public Vector2 siding = new Vector2();// 垂直向量
+    public Vector2 heading = new Vector2();
+    public Vector2 siding = new Vector2();
     public Rectangle bound = new Rectangle();
 }//end class
