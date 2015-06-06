@@ -13,7 +13,9 @@ import com.xinlan.rocketship.screen.GameScreen;
 public class Rocket extends BaseObject {
     private GameScreen context;
     private TextureRegion rocketTexture;
-    private float speed = 4f;
+
+    private float maxSpeed = 4f;// 最大速度
+    protected float mass;//质量
 
     public Rocket(GameScreen screen) {
         this.context = screen;
@@ -25,8 +27,10 @@ public class Rocket extends BaseObject {
     }
 
     public void update(float delta) {
+
+
         Touchpad touchPad = context.mController.touchpad;
-        this.position.add(touchPad.getKnobPercentX() * speed, touchPad.getKnobPercentY() * speed);
+        this.position.add(touchPad.getKnobPercentX() * maxSpeed, touchPad.getKnobPercentY() * maxSpeed);
 
         //边界条件判断
         if (position.x < this.bound.width / 2) {
