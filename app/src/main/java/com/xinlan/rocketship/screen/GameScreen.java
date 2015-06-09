@@ -100,6 +100,7 @@ public final class GameScreen extends DefautScreen {
     public void dispose() {
         mController.dispose();
         mUniversal.dispose();
+        mRocket.dispose();
     }
 
     @Override

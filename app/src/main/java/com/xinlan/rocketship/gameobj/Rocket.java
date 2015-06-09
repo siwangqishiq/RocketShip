@@ -112,4 +112,8 @@ public class Rocket extends BaseObject {
         retForce.add(touchPad.getKnobPercentX() * maxForce, touchPad.getKnobPercentY() * maxForce);
         return retForce;
     }
+
+    public void dispose(){
+        particle.dispose();
+    }
 }//end class
