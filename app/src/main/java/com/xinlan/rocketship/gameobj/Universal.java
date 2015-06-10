@@ -21,6 +21,7 @@ public class Universal {
     }
 
     public void initStars() {
+        stars.clear();
         final int step = 100;
         for (int i = 0; i < GameScreen.WORLD_HEIGHT; i += step) {
             for (int j = 0; j < GameScreen.WORLD_WIDTH; j += step) {

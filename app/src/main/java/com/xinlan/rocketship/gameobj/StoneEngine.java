@@ -18,9 +18,9 @@ public class StoneEngine {
     public TextureRegion stone1Texture, stone2Texture, stone3Texture, stone4Texture,
             stone5Texture, stone6Texture, stone7Texture, stone8Texture;
 
-    private GameScreen context;
+    public Array<Stone> stoneList = new Array<Stone>();
 
-    private Array<Stone> stoneList = new Array<Stone>();
+    private GameScreen context;
 
     public StoneEngine(GameScreen mContext) {
         this.context = mContext;
@@ -34,7 +34,8 @@ public class StoneEngine {
             //System.out.println("type-->" + stoneType);
             Stone stone = new Stone(this, MathUtils.random(0, GameScreen.WORLD_WIDTH),
                     MathUtils.random(0, GameScreen.WORLD_HEIGHT), stoneType);
-            stoneList.add(stone);
+            if (!stone.bound.overlaps(context.mRocket.bound))
+                stoneList.add(stone);
         }//end for i
     }
 

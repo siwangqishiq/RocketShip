@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.xinlan.rocketship.RocketApp;
 import com.xinlan.rocketship.gameobj.Controller;
@@ -28,9 +29,12 @@ public final class GameScreen extends DefautScreen {
 
     //GameObject
     public Controller mController;
-    Universal mUniversal;
-    Rocket mRocket;
-    StoneEngine mStoneEngine;
+    public Universal mUniversal;
+    public Rocket mRocket;
+    public StoneEngine mStoneEngine;
+
+
+    ShapeRenderer debugCanvas = new ShapeRenderer();
 
     public GameScreen(RocketApp game) {
         super(game);
@@ -42,18 +46,18 @@ public final class GameScreen extends DefautScreen {
         gameCamera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         batch = new SpriteBatch();
 
-        gameInit();
-    }
-
-    private void gameInit() {
+        // game object init
         mController = new Controller(this);
-
         mUniversal = new Universal(this);
-
         mRocket = new Rocket(this);
         mStoneEngine = new StoneEngine(this);
 
+        gameInit();
+    }
+
+    public void gameInit() {
         mUniversal.initStars();
+        mRocket.init();
         mStoneEngine.initStones();
     }
 
@@ -78,6 +82,19 @@ public final class GameScreen extends DefautScreen {
         batch.end();
 
         mController.render(batch);
+
+        //Gdx.gl.glEnable(GL20.GL_BLEND);
+//        debugCanvas.setProjectionMatrix(gameCamera.combined);
+//        debugCanvas.begin(ShapeRenderer.ShapeType.Filled);
+//        debugCanvas.setColor(1, 0, 0, 0.5f);
+//        Array<Stone> stones = mStoneEngine.stoneList;
+//        for (Stone s : stones) {
+//            Rectangle bound = s.bound;
+//            debugCanvas.rect(bound.x, bound.y, bound.width, bound.height);
+//        }
+//
+//        debugCanvas.circle(mRocket.boundCircle.x, mRocket.boundCircle.y, mRocket.boundCircle.radius);
+//        debugCanvas.end();
     }
 
     private void updateGameCamera() {
