@@ -8,12 +8,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.xinlan.rocketship.RocketApp;
 import com.xinlan.rocketship.gameobj.Controller;
 import com.xinlan.rocketship.gameobj.Rocket;
+import com.xinlan.rocketship.gameobj.StoneEngine;
 import com.xinlan.rocketship.gameobj.Universal;
 
 /**
  */
 public final class GameScreen extends DefautScreen {
-    public static final int WORLD_WIDTH = 3000;//世界宽
+    public static final int WORLD_WIDTH = 6000;//世界宽
     public static final int WORLD_HEIGHT = 3000;//世界高
 
     public static final int SCREEN_HEIGHT = 480;
@@ -29,6 +30,7 @@ public final class GameScreen extends DefautScreen {
     public Controller mController;
     Universal mUniversal;
     Rocket mRocket;
+    StoneEngine mStoneEngine;
 
     public GameScreen(RocketApp game) {
         super(game);
@@ -47,9 +49,12 @@ public final class GameScreen extends DefautScreen {
         mController = new Controller(this);
 
         mUniversal = new Universal(this);
-        mUniversal.initStars();
 
         mRocket = new Rocket(this);
+        mStoneEngine = new StoneEngine(this);
+
+        mUniversal.initStars();
+        mStoneEngine.initStones();
     }
 
     @Override
@@ -58,6 +63,7 @@ public final class GameScreen extends DefautScreen {
         mController.update(delta);
         mUniversal.update(delta);
         mRocket.update(delta);
+        mStoneEngine.update(delta);
 
         //TODO render
         delta = Math.min(0.06f, delta);
@@ -68,6 +74,7 @@ public final class GameScreen extends DefautScreen {
         batch.begin();
         mUniversal.render(batch);
         mRocket.render(batch);
+        mStoneEngine.render(batch);
         batch.end();
 
         mController.render(batch);
@@ -101,6 +108,7 @@ public final class GameScreen extends DefautScreen {
         mController.dispose();
         mUniversal.dispose();
         mRocket.dispose();
+        mStoneEngine.dispose();
     }
 
     @Override
