@@ -40,9 +40,9 @@ public class StoneEngine {
 
     public void update(float delta) {
         for (Stone stone : stoneList) {
-            int dx = MathUtils.random(0,1);
-            int dy = MathUtils.random(-1,1);
-            stone.position.add(dx,dy);
+//            int dx = MathUtils.random(0,1);
+//            int dy = MathUtils.random(-1,1);
+//            stone.position.add(dx,dy);
             stone.bound.setPosition(stone.position);
 
 
