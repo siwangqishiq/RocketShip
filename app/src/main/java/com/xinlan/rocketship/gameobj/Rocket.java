@@ -48,6 +48,7 @@ public class Rocket extends BaseObject {
         this.velocity.add(accelerataion.scl(delta));//根据加速度 计算当前速度 v=v0+a*t;
         this.velocity.limit(maxSpeed);//限制其最大速度
         this.position.add(this.velocity.cpy().scl(delta));
+        bound.setPosition(position);
 
         heading = this.velocity.cpy().nor();
         siding = this.heading;

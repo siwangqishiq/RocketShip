@@ -1,5 +1,6 @@
 package com.xinlan.rocketship.gameobj;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -16,4 +17,6 @@ public abstract class BaseObject {
     public Vector2 velocity = new Vector2();//当前速度
     public float headAngle = 0;//朝向角度
     public float mass = 1;//质量
+
+    Intersector s;
 }//end class
